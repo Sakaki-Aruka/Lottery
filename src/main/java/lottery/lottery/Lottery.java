@@ -1,9 +1,6 @@
 package lottery.lottery;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -131,6 +128,16 @@ public final class Lottery extends JavaPlugin implements Listener {
         itemStack.setItemMeta(itemMeta);
 
         world.dropItemNaturally(location,itemStack);
+    }
+
+    public void fanfare(Player player, Location location, String soundName, float volume, float pitch, Server server){
+        try{
+            Sound sound = Sound.valueOf(soundName);
+            player.playSound(location,sound,volume,pitch);
+
+        }catch (Exception exception){
+            server.getLogger().info("SoundException:"+exception);
+        }
     }
 
     @Override

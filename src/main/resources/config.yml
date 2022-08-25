@@ -4,8 +4,11 @@
 #
 # You should name as "Item~".(~ is int type number)
 # Name is Items name
+#
 # Enchantment is Enchantment (If you use this parameter, you should write UPPERCASE)
+#
 # Enchantment_level is enchantments level
+#
 # Material is material name (You should write UPPERCASE)
 #
 # Restriction is enchantments levels parameter. (If you use this parameter, you should write UPPERCASE)
@@ -18,7 +21,12 @@
 # number range is 0.001 ~ 0.999 (= 0.1% ~ 99.9%)
 # (exp. 50% 's weight is 0.50 and 99% is 0.99)
 #
+# FanfareSound is the name of a sound that is played when the player picks up the item.
+# (If you use fanfare, you should write FanfareSound with UPPERCASE. / default is Nothing)
 #
+# FanfareSoundVolume is fanfares volume.(default is 1F / float type number)
+#
+# FanfareSoundPitch is fanfares pitch.(default is 1F / float type number)
 #
 # You must write Name,Material,Weight (other parameters are options.)
 # If you do not have parameters, write "Nothing"
