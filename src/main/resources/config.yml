@@ -32,6 +32,16 @@
 # If you set the value of this parameter is 2, the sound becomes 2 times speed.
 # When you do not use this, write 0.
 #
+# LoreUse is a parameter of lore use or not use.
+# You should write true or false.(boolean type)
+# When you do not set lore, you should write false, and you want to set lore, you should write true.
+# If you write false in this parameter, you do not have to write "Lore"parameter.
+#
+# Lore is items descriptions.
+# You should write like this.->'LoreLineNumber(int type number): "Lore"'
+# exp.) 1: "this is first line of an item lore."
+# You can set maximum 10 lines.
+#
 # You must write Name,Material,Weight (other parameters are options.)
 # If you do not have parameters, write "Nothing"
 #
@@ -74,6 +84,8 @@ Item1:
   FanfareSound: "Nothing"
   FanfareSoundVolume: "0"
   FanfareSoundPitch: "0"
+  LoreUse: false
+
 
 Item2:
   Name: "Second"
@@ -86,6 +98,18 @@ Item2:
   FanfareSound: "BLOCK_ANVIL_PLACE"
   FanfareSoundVolume: "1F"
   FanfareSoundPitch: "2F"
+  LoreUse: true
+  Lore:
+    1: "1"
+    2: "2"
+    3: "3"
+    4: "4"
+    5: "5"
+    6: "6"
+    7: "7"
+    8: "8"
+    9: "9"
+    10: "10"
 
 # smallest settings
 Item3:
@@ -99,3 +123,4 @@ Item3:
   FanfareSound: "Nothing"
   FanfareSoundVolume: "0"
   FanfareSoundPitch: "0"
+  LoreUse: false

@@ -24,7 +24,7 @@ public final class Lottery extends JavaPlugin implements Listener {
 
         Player player = e.getPlayer();
         Plugin pl = Bukkit.getPluginManager().getPlugin("Lottery");
-        
+
 
         ItemStack MainHand = player.getInventory().getItemInMainHand();
 
@@ -41,6 +41,7 @@ public final class Lottery extends JavaPlugin implements Listener {
                 ArrayList<String> FanfareName = new ArrayList<>();
                 ArrayList<String> FanfareVolume = new ArrayList<>();
                 ArrayList<String> FanfarePitch = new ArrayList<>();
+                ArrayList<Boolean> LoreUse = new ArrayList<>();
 
                 //debug
                 //e.getPlayer().sendMessage("items:"+getConfig().getInt("NumberOfItems"));
@@ -57,6 +58,7 @@ public final class Lottery extends JavaPlugin implements Listener {
                     FanfareName.add(getConfig().getString("Item"+i+".FanfareSound"));
                     FanfareVolume.add(getConfig().getString("Item"+i+".FanfareSoundVolume"));
                     FanfarePitch.add(getConfig().getString("Item"+i+".FanfareSoundPitch"));
+                    LoreUse.add(getConfig().getBoolean("Item"+i+".LoreUse"));
 
                 }
 
@@ -80,7 +82,7 @@ public final class Lottery extends JavaPlugin implements Listener {
                     step += i;
                     if(step_copy <= result && result < step){
                         //write here
-                        this.template(Material.getMaterial(MaterialName.get(counter)),EnchantName.get(counter),EnchantLevel.get(counter),Restriction.get(counter),Name.get(counter),location,world,ItemFlagName.get(counter));
+                        this.template(Material.getMaterial(MaterialName.get(counter)),EnchantName.get(counter),EnchantLevel.get(counter),Restriction.get(counter),Name.get(counter),location,world,ItemFlagName.get(counter),LoreUse.get(counter),counter+1);
 
                         //playSound
                         if(!(FanfareName.get(counter).equalsIgnoreCase("Nothing"))){
@@ -109,7 +111,7 @@ public final class Lottery extends JavaPlugin implements Listener {
         }
     }
 
-    public void template(Material item,String enchantment,String level,String restriction,String name,Location location,World world,String itemFlag){
+    public void template(Material item,String enchantment,String level,String restriction,String name,Location location,World world,String itemFlag,boolean LoreUse,int itemNumber){
         ItemStack itemStack = new ItemStack(item);
         ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -146,6 +148,20 @@ public final class Lottery extends JavaPlugin implements Listener {
             //exists "Nothing
         }
 
+        ArrayList<String> Lore = new ArrayList<>();
+        if(LoreUse){
+            //lore use
+            for (int i=1;i<=10;i++){
+                try{
+                    Lore.add(getConfig().getString("Item"+itemNumber+".Lore."+i));
+                }catch (Exception exception){
+                    //debug
+                    System.out.println("[Lottery Plugin]-> LoreException:"+exception);
+                }
+            }
+        }
+
+        itemMeta.setLore(Lore);
         itemMeta.setDisplayName(name);
         itemStack.setItemMeta(itemMeta);
 
