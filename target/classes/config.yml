@@ -41,6 +41,7 @@
 # You should write like this.->'LoreLineNumber(int type number): "Lore"'
 # exp.) 1: "this is first line of an item lore."
 # You can set maximum 10 lines.
+# You can use "§".(see here -> https://htmlcolorcodes.com/minecraft-color-codes/)
 #
 # You must write Name,Material,Weight (other parameters are options.)
 # If you do not have parameters, write "Nothing"

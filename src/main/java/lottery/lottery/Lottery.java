@@ -19,48 +19,121 @@ import java.util.Arrays;
 
 public final class Lottery extends JavaPlugin implements Listener {
 
+    private static int Items;
+    private static ArrayList<String> Name = new ArrayList<>();
+    private static ArrayList<String> EnchantName = new ArrayList<>();
+    private static ArrayList<String> EnchantLevel = new ArrayList<>();
+    private static ArrayList<String> MaterialName = new ArrayList<>();
+    private static ArrayList<String> Restriction = new ArrayList<>();
+    private static ArrayList<String> ItemFlagName = new ArrayList<>();
+    private static ArrayList<Double> Weight = new ArrayList<>();
+    private static ArrayList<String> FanfareName = new ArrayList<>();
+    private static ArrayList<String> FanfareVolume = new ArrayList<>();
+    private static ArrayList<String> FanfarePitch = new ArrayList<>();
+    private static ArrayList<Boolean> LoreUse = new ArrayList<>();
+    private static ArrayList<String> Lore = new ArrayList<>();
+
+    public void load(){
+
+
+        Items = getConfig().getInt("NumberOfItems");
+        for(int i=1;i<=Items;i++){
+            Name.add(getConfig().getString("Item"+i+".Name"));
+            EnchantName.add(getConfig().getString("Item"+i+".Enchantment"));
+            EnchantLevel.add(getConfig().getString("Item"+i+".Enchantment_level"));
+            MaterialName.add(getConfig().getString("Item"+i+".Material"));
+            Restriction.add(getConfig().getString("Item"+i+".Restriction"));
+            ItemFlagName.add(getConfig().getString("Item"+i+".ItemFlag"));
+            Weight.add(getConfig().getDouble("Item"+i+".Weight"));
+            FanfareName.add(getConfig().getString("Item"+i+".FanfareSound"));
+            FanfareVolume.add(getConfig().getString("Item"+i+".FanfareSoundVolume"));
+            FanfarePitch.add(getConfig().getString("Item"+i+".FanfareSoundPitch"));
+            LoreUse.add(getConfig().getBoolean("Item"+i+".LoreUse"));
+
+        }
+
+    }
+
+    public ArrayList<String> Name(){
+        return Name;
+    }
+
+    public ArrayList<String> EnchantName(){
+        return EnchantName;
+    }
+
+    public ArrayList<String> EnchantLevel(){
+        return EnchantLevel;
+    }
+
+    public ArrayList<String> MaterialName(){
+        return MaterialName;
+    }
+
+    public ArrayList<String> Restriction(){
+        return Restriction;
+    }
+
+    public ArrayList<String> ItemFlagName(){
+        return ItemFlagName;
+    }
+
+    public ArrayList<Double> Weight(){
+        return Weight;
+    }
+
+    public ArrayList<String> FanfareName(){
+        return FanfareName;
+    }
+
+    public ArrayList<String> FanfareVolume(){
+        return FanfareVolume;
+    }
+
+    public ArrayList<String> FanfarePitch(){
+        return FanfarePitch;
+    }
+
+    public ArrayList<Boolean> LoreUse(){
+        return LoreUse;
+    }
+
+    @Override
+    public void onEnable() {
+        saveDefaultConfig();
+        // config data load
+        this.load();
+        getServer().getPluginManager().registerEvents(this,this);
+    }
+
+     @Override
+    public void onDisable() {
+        // Plugin shutdown logic
+    }
+
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent e){
-
         Player player = e.getPlayer();
         Plugin pl = Bukkit.getPluginManager().getPlugin("Lottery");
-
-
         ItemStack MainHand = player.getInventory().getItemInMainHand();
 
         if(MainHand.containsEnchantment(Enchantment.MENDING)){
             if(MainHand.getType()== Material.CHEST){
+                // the player place mending-chest(lottery event started)
 
-                ArrayList<String> Name = new ArrayList<>();
-                ArrayList<String> EnchantName = new ArrayList<>();
-                ArrayList<String> EnchantLevel = new ArrayList<>();
-                ArrayList<String> MaterialName = new ArrayList<>();
-                ArrayList<String> Restriction = new ArrayList<>();
-                ArrayList<String> ItemFlagName = new ArrayList<>();
-                ArrayList<Double> Weight = new ArrayList<>();
-                ArrayList<String> FanfareName = new ArrayList<>();
-                ArrayList<String> FanfareVolume = new ArrayList<>();
-                ArrayList<String> FanfarePitch = new ArrayList<>();
-                ArrayList<Boolean> LoreUse = new ArrayList<>();
-
-                //debug
-                //e.getPlayer().sendMessage("items:"+getConfig().getInt("NumberOfItems"));
-
-                int Items = getConfig().getInt("NumberOfItems");
-                for(int i=1;i<= Items;i++){
-                    Name.add(getConfig().getString("Item"+i+".Name"));
-                    EnchantName.add(getConfig().getString("Item"+i+".Enchantment"));
-                    EnchantLevel.add(getConfig().getString("Item"+i+".Enchantment_level"));
-                    MaterialName.add(getConfig().getString("Item"+i+".Material"));
-                    Restriction.add(getConfig().getString("Item"+i+".Restriction"));
-                    ItemFlagName.add(getConfig().getString("Item"+i+".ItemFlag"));
-                    Weight.add(getConfig().getDouble("Item"+i+".Weight"));
-                    FanfareName.add(getConfig().getString("Item"+i+".FanfareSound"));
-                    FanfareVolume.add(getConfig().getString("Item"+i+".FanfareSoundVolume"));
-                    FanfarePitch.add(getConfig().getString("Item"+i+".FanfareSoundPitch"));
-                    LoreUse.add(getConfig().getBoolean("Item"+i+".LoreUse"));
-
-                }
+                // data load start
+                ArrayList<String> Name = this.Name();
+                ArrayList<String> EnchantName = this.EnchantName();
+                ArrayList<String> EnchantLevel = this.EnchantLevel();
+                ArrayList<String> MaterialName = this.MaterialName();
+                ArrayList<String> Restriction = this.Restriction();
+                ArrayList<String> ItemFlagName = this.ItemFlagName();
+                ArrayList<Double> Weight = this.Weight();
+                ArrayList<String> FanfareName = this.FanfareName();
+                ArrayList<String> FanfareVolume = this.FanfareVolume();
+                ArrayList<String> FanfarePitch = this.FanfarePitch();
+                ArrayList<Boolean> LoreUse = this.LoreUse();
+                // data load finish
 
                 int player_have = MainHand.getAmount();
                 if(1 < player_have){
@@ -78,10 +151,10 @@ public final class Lottery extends JavaPlugin implements Listener {
                 double step_copy = 0.0;
                 int counter = 0;
 
+                // lottery start
                 for(double i:Weight){
                     step += i;
                     if(step_copy <= result && result < step){
-                        //write here
                         this.template(Material.getMaterial(MaterialName.get(counter)),EnchantName.get(counter),EnchantLevel.get(counter),Restriction.get(counter),Name.get(counter),location,world,ItemFlagName.get(counter),LoreUse.get(counter),counter+1);
 
                         //playSound
@@ -105,9 +178,9 @@ public final class Lottery extends JavaPlugin implements Listener {
                         step_copy =step;
                         counter++;
                     }
+                    // lottery finish
                 }
             }
-
         }
     }
 
@@ -153,6 +226,7 @@ public final class Lottery extends JavaPlugin implements Listener {
             //lore use
             for (int i=1;i<=10;i++){
                 try{
+
                     Lore.add(getConfig().getString("Item"+itemNumber+".Lore."+i));
                 }catch (Exception exception){
                     //debug
@@ -178,14 +252,6 @@ public final class Lottery extends JavaPlugin implements Listener {
         }
     }
 
-    @Override
-    public void onEnable() {
-        saveDefaultConfig();
-        getServer().getPluginManager().registerEvents(this,this);
-    }
 
-     @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
+
 }
