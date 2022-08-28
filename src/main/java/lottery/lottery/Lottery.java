@@ -24,43 +24,42 @@ public final class Lottery extends JavaPlugin implements Listener {
 
         Player player = e.getPlayer();
         Plugin pl = Bukkit.getPluginManager().getPlugin("Lottery");
-        //write here
-        ArrayList<String> Name = new ArrayList<>();
-        ArrayList<String> EnchantName = new ArrayList<>();
-        ArrayList<String> EnchantLevel = new ArrayList<>();
-        ArrayList<String> MaterialName = new ArrayList<>();
-        ArrayList<String> Restriction = new ArrayList<>();
-        ArrayList<String> ItemFlagName = new ArrayList<>();
-        ArrayList<Double> Weight = new ArrayList<>();
-        ArrayList<String> FanfareName = new ArrayList<>();
-        ArrayList<String> FanfareVolume = new ArrayList<>();
-        ArrayList<String> FanfarePitch = new ArrayList<>();
-
-        //debug
-        //e.getPlayer().sendMessage("items:"+getConfig().getInt("NumberOfItems"));
-
-        int Items = getConfig().getInt("NumberOfItems");
-        for(int i=1;i<= Items;i++){
-            Name.add(getConfig().getString("Item"+i+".Name"));
-            EnchantName.add(getConfig().getString("Item"+i+".Enchantment"));
-            EnchantLevel.add(getConfig().getString("Item"+i+".Enchantment_level"));
-            MaterialName.add(getConfig().getString("Item"+i+".Material"));
-            Restriction.add(getConfig().getString("Item"+i+".Restriction"));
-            ItemFlagName.add(getConfig().getString("Item"+i+".ItemFlag"));
-            Weight.add(getConfig().getDouble("Item"+i+".Weight"));
-            FanfareName.add(getConfig().getString("Item"+i+".FanfareSound"));
-            FanfareVolume.add(getConfig().getString("Item"+i+".FanfareSoundVolume"));
-            FanfarePitch.add(getConfig().getString("Item"+i+".FanfareSoundPitch"));
-
-        }
-
-        //debug
-        //e.getPlayer().sendMessage("ItemName:"+Name+"\nEnchantment:"+EnchantName+"\nEnchantment_level:"+EnchantLevel+"\nMaterial:"+MaterialName+"\nRestriction:"+Restriction+"\nItemFlag:"+ItemFlagName+"\nWeight:"+Weight);
+        
 
         ItemStack MainHand = player.getInventory().getItemInMainHand();
 
         if(MainHand.containsEnchantment(Enchantment.MENDING)){
             if(MainHand.getType()== Material.CHEST){
+
+                ArrayList<String> Name = new ArrayList<>();
+                ArrayList<String> EnchantName = new ArrayList<>();
+                ArrayList<String> EnchantLevel = new ArrayList<>();
+                ArrayList<String> MaterialName = new ArrayList<>();
+                ArrayList<String> Restriction = new ArrayList<>();
+                ArrayList<String> ItemFlagName = new ArrayList<>();
+                ArrayList<Double> Weight = new ArrayList<>();
+                ArrayList<String> FanfareName = new ArrayList<>();
+                ArrayList<String> FanfareVolume = new ArrayList<>();
+                ArrayList<String> FanfarePitch = new ArrayList<>();
+
+                //debug
+                //e.getPlayer().sendMessage("items:"+getConfig().getInt("NumberOfItems"));
+
+                int Items = getConfig().getInt("NumberOfItems");
+                for(int i=1;i<= Items;i++){
+                    Name.add(getConfig().getString("Item"+i+".Name"));
+                    EnchantName.add(getConfig().getString("Item"+i+".Enchantment"));
+                    EnchantLevel.add(getConfig().getString("Item"+i+".Enchantment_level"));
+                    MaterialName.add(getConfig().getString("Item"+i+".Material"));
+                    Restriction.add(getConfig().getString("Item"+i+".Restriction"));
+                    ItemFlagName.add(getConfig().getString("Item"+i+".ItemFlag"));
+                    Weight.add(getConfig().getDouble("Item"+i+".Weight"));
+                    FanfareName.add(getConfig().getString("Item"+i+".FanfareSound"));
+                    FanfareVolume.add(getConfig().getString("Item"+i+".FanfareSoundVolume"));
+                    FanfarePitch.add(getConfig().getString("Item"+i+".FanfareSoundPitch"));
+
+                }
+
                 int player_have = MainHand.getAmount();
                 if(1 < player_have){
                     MainHand.setAmount(player_have-1);
