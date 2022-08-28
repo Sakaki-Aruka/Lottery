@@ -23,10 +23,14 @@
 #
 # FanfareSound is the name of a sound that is played when the player picks up the item.
 # (If you use fanfare, you should write FanfareSound with UPPERCASE. / default is Nothing)
+# You can set one sound to one item.
 #
 # FanfareSoundVolume is fanfares volume.(default is 1F / float type number)
+# When you do not use this, write 0.
 #
 # FanfareSoundPitch is fanfares pitch.(default is 1F / float type number)
+# If you set the value of this parameter is 2, the sound becomes 2 times speed.
+# When you do not use this, write 0.
 #
 # You must write Name,Material,Weight (other parameters are options.)
 # If you do not have parameters, write "Nothing"
@@ -67,6 +71,9 @@ Item1:
   Restriction: "true true"
   ItemFlag: "Nothing"
   Weight: 0.50
+  FanfareSound: "Nothing"
+  FanfareSoundVolume: "0"
+  FanfareSoundPitch: "0"
 
 Item2:
   Name: "Second"
@@ -76,6 +83,9 @@ Item2:
   Restriction: "true"
   ItemFlag: "HIDE_ENCHANTS"
   Weight: 0.25
+  FanfareSound: "BLOCK_ANVIL_PLACE"
+  FanfareSoundVolume: "1F"
+  FanfareSoundPitch: "2F"
 
 # smallest settings
 Item3:
@@ -86,3 +96,6 @@ Item3:
   Restriction: "Nothing"
   ItemFlag: "Nothing"
   Weight: 0.25
+  FanfareSound: "Nothing"
+  FanfareSoundVolume: "0"
+  FanfareSoundPitch: "0"

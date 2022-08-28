@@ -32,6 +32,9 @@ public final class Lottery extends JavaPlugin implements Listener {
         ArrayList<String> Restriction = new ArrayList<>();
         ArrayList<String> ItemFlagName = new ArrayList<>();
         ArrayList<Double> Weight = new ArrayList<>();
+        ArrayList<String> FanfareName = new ArrayList<>();
+        ArrayList<String> FanfareVolume = new ArrayList<>();
+        ArrayList<String> FanfarePitch = new ArrayList<>();
 
         //debug
         //e.getPlayer().sendMessage("items:"+getConfig().getInt("NumberOfItems"));
@@ -45,6 +48,9 @@ public final class Lottery extends JavaPlugin implements Listener {
             Restriction.add(getConfig().getString("Item"+i+".Restriction"));
             ItemFlagName.add(getConfig().getString("Item"+i+".ItemFlag"));
             Weight.add(getConfig().getDouble("Item"+i+".Weight"));
+            FanfareName.add(getConfig().getString("Item"+i+".FanfareSound"));
+            FanfareVolume.add(getConfig().getString("Item"+i+".FanfareSoundVolume"));
+            FanfarePitch.add(getConfig().getString("Item"+i+".FanfareSoundPitch"));
 
         }
 
@@ -76,6 +82,23 @@ public final class Lottery extends JavaPlugin implements Listener {
                     if(step_copy <= result && result < step){
                         //write here
                         this.template(Material.getMaterial(MaterialName.get(counter)),EnchantName.get(counter),EnchantLevel.get(counter),Restriction.get(counter),Name.get(counter),location,world,ItemFlagName.get(counter));
+
+                        //playSound
+                        if(!(FanfareName.get(counter).equalsIgnoreCase("Nothing"))){
+                            //exist sound name
+                            float volume=0F;
+                            float pitch=0F;
+                            try{
+                                volume = Float.valueOf(FanfareVolume.get(counter));
+                                pitch = Float.valueOf(FanfarePitch.get(counter));
+                            }catch (Exception exception){
+                                System.out.println("[Lottery Plugin]-> TypeError:You should write FanfareSoundVolume and FanfareSoundPitch in float.");
+                            }
+
+                            this.fanfare(player,location,FanfareName.get(counter),volume,pitch);
+
+                        }
+
                         return;
                     }else{
                         step_copy =step;
@@ -130,13 +153,13 @@ public final class Lottery extends JavaPlugin implements Listener {
         world.dropItemNaturally(location,itemStack);
     }
 
-    public void fanfare(Player player, Location location, String soundName, float volume, float pitch, Server server){
+    public void fanfare(Player player, Location location, String soundName, float volume, float pitch){
         try{
             Sound sound = Sound.valueOf(soundName);
             player.playSound(location,sound,volume,pitch);
 
         }catch (Exception exception){
-            server.getLogger().info("SoundException:"+exception);
+            System.out.println("[Lottery Plugin]-> SoundException:"+exception);
         }
     }
 
