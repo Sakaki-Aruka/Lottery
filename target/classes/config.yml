@@ -86,6 +86,7 @@ Item1:
   FanfareSoundVolume: "0"
   FanfareSoundPitch: "0"
   LoreUse: false
+  unbreak: false
 
 
 Item2:
@@ -111,6 +112,7 @@ Item2:
     8: "§l8"
     9: "§o9"
     10: "§f10"
+  unbreak: false
 
 # smallest settings
 Item3:
@@ -125,3 +127,4 @@ Item3:
   FanfareSoundVolume: "0"
   FanfareSoundPitch: "0"
   LoreUse: false
+  unbreak: false

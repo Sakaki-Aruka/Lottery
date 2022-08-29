@@ -24,6 +24,7 @@ public class Load {
     private static ArrayList<String> FanfarePitch = new ArrayList<>();
     private static ArrayList<Boolean> LoreUse = new ArrayList<>();
     private static ArrayList<String> Lore = new ArrayList<>();
+    private static ArrayList<Boolean> unbreakable = new ArrayList<>();
 
     public void getConfig(){
 
@@ -40,6 +41,7 @@ public class Load {
             FanfareVolume.add(FC.getString("Item"+i+".FanfareSoundVolume"));
             FanfarePitch.add(FC.getString("Item"+i+".FanfareSoundPitch"));
             LoreUse.add(FC.getBoolean("Item"+i+".LoreUse"));
+            unbreakable.add(FC.getBoolean("Item"+i+".unbreak"));
 
         }
 
@@ -87,5 +89,9 @@ public class Load {
 
     public ArrayList<Boolean> LoreUse(){
         return LoreUse;
+    }
+
+    public ArrayList<Boolean> Unbreakable(){
+        return unbreakable;
     }
 }

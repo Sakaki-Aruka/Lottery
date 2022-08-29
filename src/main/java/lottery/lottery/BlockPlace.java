@@ -38,6 +38,7 @@ public class BlockPlace implements Listener {
                 ArrayList<String> FanfareVolume = load.FanfareVolume();
                 ArrayList<String> FanfarePitch = load.FanfarePitch();
                 ArrayList<Boolean> LoreUse = load.LoreUse();
+                ArrayList<Boolean> Unbreakable = load.Unbreakable();
                 // data load finish
 
                 int player_have = MainHand.getAmount();
@@ -60,7 +61,7 @@ public class BlockPlace implements Listener {
                 for(double i:Weight){
                     step += i;
                     if(step_copy <= result && result < step){
-                        this.template(Material.getMaterial(MaterialName.get(counter)),EnchantName.get(counter),EnchantLevel.get(counter),Restriction.get(counter),Name.get(counter),location,world,ItemFlagName.get(counter),LoreUse.get(counter),counter+1);
+                        this.template(Material.getMaterial(MaterialName.get(counter)),EnchantName.get(counter),EnchantLevel.get(counter),Restriction.get(counter),Name.get(counter),location,world,ItemFlagName.get(counter),LoreUse.get(counter),counter+1,Unbreakable.get(counter));
 
                         //playSound
                         if(!(FanfareName.get(counter).equalsIgnoreCase("Nothing"))){
@@ -89,7 +90,7 @@ public class BlockPlace implements Listener {
         }
     }
 
-    public void template(Material item,String enchantment,String level,String restriction,String name,Location location,World world,String itemFlag,boolean LoreUse,int itemNumber){
+    public void template(Material item,String enchantment,String level,String restriction,String name,Location location,World world,String itemFlag,boolean LoreUse,int itemNumber,boolean unbreakable){
         ItemStack itemStack = new ItemStack(item);
         ItemMeta itemMeta = itemStack.getItemMeta();
 
@@ -138,6 +139,11 @@ public class BlockPlace implements Listener {
                     System.out.println("[Lottery Plugin]-> LoreException:"+exception);
                 }
             }
+        }
+
+        //set unbreakable
+        if(unbreakable){
+            itemMeta.setUnbreakable(true);
         }
 
         itemMeta.setLore(Lore);
