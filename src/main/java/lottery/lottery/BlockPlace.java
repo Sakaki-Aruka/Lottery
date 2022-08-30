@@ -128,16 +128,27 @@ public class BlockPlace implements Listener {
         }
 
         ArrayList<String> Lore = new ArrayList<>();
+        Load load = new Load();
+
         if(LoreUse){
             //lore use
-            for (int i=1;i<=10;i++){
-                try{
-                    Load load = new Load();
-                    Lore.add(load.FC.getString("Item"+itemNumber+".Lore."+i));
-                }catch (Exception exception){
-                    //debug
-                    System.out.println("[Lottery Plugin]-> LoreException:"+exception);
+
+            int loreLines = load.FC.getInt("Item"+itemNumber+".LoreLines");
+
+            for (int i=1;i<=loreLines;i++){
+                if(load.FC.contains("Item"+itemNumber+".Lore."+i)){
+                    try{
+
+                        Lore.add(load.FC.getString("Item"+itemNumber+".Lore."+i));
+                    }catch (Exception exception){
+                        //debug
+                        System.out.println("[Lottery Plugin]-> LoreException:"+exception);
+                    }
+                }else{
+                    // does not find the lore line
+                    continue;
                 }
+
             }
         }
 

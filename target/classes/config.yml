@@ -101,6 +101,7 @@ Item2:
   FanfareSoundVolume: "1F"
   FanfareSoundPitch: "2F"
   LoreUse: true
+  LoreLines: 10
   Lore:
     1: "§a1"
     2: "§b2"
