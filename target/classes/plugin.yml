@@ -1,8 +1,0 @@
-name: Lottery
-version: '01'
-main: lottery.lottery.Lottery
-api-version: 1.19
-authors: [ SakakiAruka ]
-description: Lottery Plugin (for Spigot)
-
-
